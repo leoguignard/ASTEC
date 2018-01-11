@@ -1,0 +1,37 @@
+In file included from /usr/include/stdio.h:49,
+                 from /usr/local/gcc/lib/gcc-lib/i686-pc-linux-gnu/2.95.3/include/stdarg.h:74,
+                 from /usr/include/string.h:284,
+                 from /usr/include/malloc.h:223,
+                 from /usr/local/gcc/lib/gcc-lib/i686-pc-linux-gnu/2.95.3/include/stddef.h:281,
+                 from ../libvt/vt_image.h:94,
+                 from ../libvt/vt_typedefs.h:79,
+                 from ../libbasic/typedefs.h:67,
+                 from test-tube3D.c:354:
+/usr/include/libio.h:173: warning: This file contains more `{'s than `}'s.
+In file included from /usr/include/stdio.h:48,
+                 from /usr/local/gcc/lib/gcc-lib/i686-pc-linux-gnu/2.95.3/include/stdarg.h:74,
+                 from /usr/include/string.h:284,
+                 from /usr/include/malloc.h:223,
+                 from /usr/local/gcc/lib/gcc-lib/i686-pc-linux-gnu/2.95.3/include/stddef.h:281,
+                 from ../libvt/vt_image.h:94,
+                 from ../libvt/vt_typedefs.h:79,
+                 from ../libbasic/typedefs.h:67,
+                 from test-tube3D.c:354:
+/usr/include/libio.h:374: warning: This file contains more `}'s than `{'s.
+../libbasic/connexe.c:2050: parse error before `*'
+../libbasic/connexe.c: In function `SortCCWithRespectToSize':
+../libbasic/connexe.c:2055: `typeCC' undeclared (first use in this function)
+../libbasic/connexe.c:2055: (Each undeclared identifier is reported only once
+../libbasic/connexe.c:2055: for each function it appears in.)
+../libbasic/connexe.c:2055: parse error before `tmp'
+../libbasic/connexe.c:2057: `left' undeclared (first use in this function)
+../libbasic/connexe.c:2057: `right' undeclared (first use in this function)
+../libbasic/connexe.c:2059: `tmp' undeclared (first use in this function)
+../libbasic/connexe.c:2059: `tab' undeclared (first use in this function)
+../libbasic/connexe.c: In function `RelabelConnectedComponentsByDecreasingSize':
+../libbasic/connexe.c:2084: `typeCC' undeclared (first use in this function)
+../libbasic/connexe.c:2084: `theCC' undeclared (first use in this function)
+../libbasic/connexe.c:2084: parse error before `)'
+../libbasic/connexe.c:2105: `_verbose_' undeclared (first use in this function)
+../libbasic/connexe.c:2123: parse error before `)'
+../libbasic/connexe.c:2124: parse error before `)'

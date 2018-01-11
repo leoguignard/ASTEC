@@ -1,0 +1,948 @@
+\documentclass[10pt]{report}
+\usepackage{amssymb}
+
+
+\newcommand{\ens}[4]{ {#1}_{\mathbb{#2}} \leftarrow {#3}_{\mathbb{#4}} }
+
+
+
+\def\applyTrsf{\texttt{applyTrsf} }
+\def\baladin{\texttt{baladin} }
+\def\blockmatching{\texttt{blockmatching} }
+\def\composeTrsf{\texttt{composeTrsf} }
+\def\copyTrsf{\texttt{copyTrsf} }
+\def\createGrid{\texttt{createGrid} }
+\def\cropImage{\texttt{cropImage} }
+\def\invTrsf{\texttt{invTrsf} }
+\def\printTrsf{\texttt{printTrsf} }
+
+
+%\newenvironment{attention}{\begin{description}\item[\textsc{Pay attention:}]}{\end{description}}
+\newenvironment{attention}{\noindent \textsc{[Pay attention]}}{}
+% \def\attention{\textsc{[Pay attention]} }
+
+%\newenvironment{note}{\begin{description}\item[\textsc{Note:}]}{\end{description}}
+\newenvironment{note}{\noindent \textsc{[Note]}}{}
+% \def\note{\textsc{[note]} }
+
+
+\newcommand{\option}[1]{{\texttt{'#1'}}}
+
+\newenvironment{code}[1]{\mbox{}\\[1ex]\hspace*{-#1cm}\begin{minipage}{150mm}\begin{quote}\tt}{\end{quote}\end{minipage}\mbox{}\\[1ex]}
+
+
+\begin{document}
+
+
+\tableofcontents
+
+\newpage
+
+\chapter{User documentation}
+
+
+
+
+
+\section{\blockmatching}
+
+\subsection{Basic use}
+
+\blockmatching registers a floating image $I_{flo}$ onto a reference image $I_{ref}$, and yields two results: the transformation from the reference image frame towards the floating image frame,  $T_{res} = T_{I_{flo} \leftarrow I_{ref}}$, and the floating image resampled in the same frame than the reference image, $I_{res} = I_{flo} \circ T_{I_{flo} \leftarrow I_{ref}}$.
+
+\begin{code}{0.8}
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ -res $I_{res}$ -res-trsf $T_{res}$ ...
+\end{code}
+
+$T_{res} = T_{I_{flo} \leftarrow I_{ref}}$ allows to resample $I_{flo}$, or any image defined in the same frame than $I_{flo}$, into the same frame than $I_{ref}$, which can also be done afterwards with \applyTrsf.
+
+\begin{code}{0.8}
+\% \applyTrsf $I_{flo}$ $I_{res}$ -trsf $T_{res}$ -template $I_{ref}$ \\
+\end{code}
+
+For instance, this allows to \textit{visualize} the deformation undergone by $I_{flo}$ by applying the transformation to a grid image (see \createGrid). 
+
+
+\subsection{Options and parameters (general informations)}
+
+
+Running the program without any options gives the minimal syntax:
+\begin{code}{1}
+\% \blockmatching 
+\end{code}
+Running it with either \option{-h} or \option{--h} gives the option list:
+\begin{code}{1}
+\% \blockmatching -h
+\end{code}
+Running it with either \option{-help} or \option{--help} gives some details about the options:
+\begin{code}{1}
+\% \blockmatching -help
+\end{code}
+
+\begin{attention} 
+Default parameters depend on the transformation type (linear or non-linear). 
+The \option{-print-parameters} allows printing the values of the parameters, so running \blockmatching with this option along with the chosen type of transformation (with \option{-trsf-type}) may be a good idea. 
+\begin{code}{1}
+\% \blockmatching ... -print-parameters ...
+\end{code}
+If a logfile name is given (with option \option{-logfile}), parameter values will be printed out in this file.
+\end{attention}
+
+
+\subsection{Transformation estimation}
+
+The principle of \blockmatching is to pair blocks from the floating
+image $I_{flo}$ with blocks of the  reference image $I_{ref}$,
+i.e. for each blocks in  the floating
+image $I_{flo}$, we are looking in a neighborhood of the reference
+image $I_{ref}$ for the best similar block.
+
+
+\subsection{Vector field transformations}
+
+
+
+\subsection{Initial transformations}
+There are two (not exclusive) ways to specify an initial transformation.
+These two ways of instanciating an initial transformation are related to the way the result transformation is calculated:
+\begin{equation}
+T_{res}= T_{init}
+\circ 
+\overbrace{\delta{T} \circ \ldots \circ \delta{T}}^{\begin{array}{c}\textrm{incremental transformations} \\ \textrm{computed during} \\ r\textrm{egistration}\end{array}} 
+\circ 
+T^0
+\label{eq:tresversustinit}
+\end{equation}
+$T_{init}$ and $T_0$ are respectively initialized by \option{-initial-transformation} 
+and \option{-initial-result-transformation}, but $T_{init}$ will remain unchanged during the computation
+while $T_0$ will be iteratively updated.
+
+\begin{itemize}
+
+\item the option \option{-initial-[voxel-]transformation} is used to specify a transformation $T_{init}$ that is applied to the floating image $I_{flo}$. Therefore, it comes to register $I_{flo} \circ T_{init}$ with $I_{ref}$. 
+In other words, the transformation $T_{res}$ obtained with
+\begin{code}{1}
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ ... -initial-transformation $T_{init}$  -res-trsf $T_{res}$
+\end{code}
+is comparable\footnote{should be equal, but due to resampling effect, differences can occur.} to the one, $T_{res,2}$ obtained with the following commands
+\begin{code}{1}
+\% \applyTrsf $I_{flo}$ $I_{flo,2}$ -trsf $T_{init}$ \\
+\% \blockmatching -flo $I_{flo,2}$ -ref $I_{ref}$ ... -res-trsf $T_{intermediary}$ \\
+\% \composeTrsf -res $T_{res,2}$ -trsfs $T_{init}$ $T_{intermediary}$ 
+\end{code}
+
+\item the option \option{-initial-result-[voxel-]transformation} is used to specify the initial value of the transformation to be computed. This can be used to continue a registration done at the higher scale.
+
+For instance, the result transformation $T_{res}$ computed in one shot by
+\begin{code}{1}
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ ...  -res-trsf $T_{res}$ -py-ll 0 -py-hl 3
+\end{code}
+is equal to the result transformation $T_{res,2}$ that is computed in two step (the first step uses the scales 3 and 2, while the second one uses the scales 1 and 0).
+\begin{code}{1}
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ ...  -res-trsf $T_{intermediary}$ -py-ll 2 -py-hl 3 \\
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ ...  -init-res-trsf $T_{intermediary}$ -res-trsf $T_{res,2}$ -py-ll 0 -py-hl 1
+\end{code}
+This may allow to qualitatively evaluate the intermediary result before running the algorithm at the lower scales that are computationaly expensive.
+
+\begin{note}
+This can somewhow be viewed as registering $I_{flo}$ with $I_{ref} \circ T^{-1}_{0}$, but with blocks that would not be square but deformed by $T^{-1}_{0}$.
+\end{note}
+
+\end{itemize}
+
+
+
+\subsection{Result transformation}
+
+\option{-result-[voxel-]transformation} is used to specify the name of the output transfomration 
+$T_{res} = \circ T_{I_{flo} \leftarrow I_{ref}}$ that allows to resample $I_{flo}$ onto $I_{ref}$. When initial transformations are given, they are "included" in the result transformation (see Eq. \ref{eq:tresversustinit}).
+
+
+\section{\blockmatching versus \baladin}
+
+% \subsection{Transformations}
+
+A typical call to \blockmatching is
+\begin{code}{0.8}
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ -res $I_{block}$ 
+   -res-trsf $T_{block}$ -res-voxel-trsf $\hat{T}_{block}$ ...
+\end{code}
+where $I_{block}$, $T_{block}$, and $\hat{T}_{block}$ denote respectively the result image, i.e. the floating image resampled in the frame of $I_{ref}$, the transformation result in \textit{real} coordinates that allows to goes from $I_{ref}$ frame towards $I_{flo}$ frame (and then to resample $I_{flo}$ in the frame of $I_{ref}$), and the transformation result in \textit{voxel} coordinates.
+
+A typical call to \baladin is
+\begin{code}{0.8}
+\% \baladin -flo $I_{flo}$ -ref $I_{ref}$ -res $I_{balad}$ 
+-result-matrix $\hat{T}_{balad}$ -result-real-matrix $T_{balad}$ ...
+\end{code}
+where $I_{balad}$, $T_{balad}$, and $\hat{T}_{balad}$ denote respectively the result image, i.e. the floating image resampled in the frame of $I_{ref}$, the transformation result in \textit{real} coordinates that allows to goes from $I_{flo}$ frame towards $I_{ref}$ frame, and the transformation result in \textit{voxel} coordinates.
+
+\begin{attention} The result transformation of \baladin is then the inverse of that of \blockmatching. We have 
+$$ T_{block} \sim T^{-1}_{balad} \quad \mbox{ and } \quad \hat{T}_{block} \sim \hat{T}^{-1}_{balad}
+$$
+\end{attention}
+
+Therefore $T_{block} \circ T_{balad}$ and $\hat{T}_{block} \circ \hat{T}_{balad}$ should be close to the identity, and this can be verified by computing $T_{test} = T_{block} \circ T_{balad}$
+and $\hat{T}_{test} = \hat{T}_{block} \circ \hat{T}_{balad}$:
+\begin{code}{0.8}
+\% \composeTrsf -res $T_{test}$ -trsfs $T_{block}$ $T_{balad}$ \\
+\% \printTrsf $T_{test}$\\
+\% \composeTrsf -res $\hat{T}_{test}$ -trsfs $\hat{T}_{block}$ $\hat{T}_{balad}$\\
+\% \printTrsf $\hat{T}_{test}$\\
+\end{code}
+
+The transformations issued from \baladin can be used to resample the floating image $I_{flo}$ but require to be inverted beforehand. To compute the resampled floating image $I_{balad}$ from the \textit{real} transformation $T_{balad}$, the commands are:
+\begin{code}{0.8}
+\% \invTrsf $T_{balad}$ $T^{-1}_{balad}$ \\
+\% \applyTrsf $I_{flo}$ $I_{balad}$ -template $I_{ref}$ -trsf $T^{-1}_{balad}$
+\end{code}
+$I_{balad}$ can also be computed from from the \textit{voxel} transformation $\hat{T}_{balad}$ accordingly
+\begin{code}{0.8}
+\% \invTrsf $\hat{T}_{balad}$ $\hat{T}^{-1}_{balad}$ \\
+\% \applyTrsf $I_{flo}$ $I_{balad}$ -template $I_{ref}$ -voxel-trsf $\hat{T}^{-1}_{balad}$
+\end{code}
+
+
+
+
+
+
+\section{\applyTrsf}
+
+\applyTrsf allows to resample an image according to a transformation $T$. One has to recall that the transformation goes from the \textit{destination/result image} towards the \textit{image to be resampled}. This is counter-intuitive, but can easily be explained: to compute the value of the point $M$ in the destination/result image, one has to know where this point comes from in the image to be resampled.
+
+So, to resample the image $I_{flo}$ in the same frame than the image $I_{ref}$ with a transformation that $T$ goes from $I_{ref}$ towards $I_{flo}$, i.e. 
+\begin{eqnarray*}
+T & = & T_{I_{flo} \leftarrow I_{ref}} \\
+I_{res} & = & I_{flo} \circ T
+\end{eqnarray*}
+ the command is  
+
+\begin{code}{0.8}
+\% \applyTrsf $I_{flo}$ $I_{res}$ -trsf $T$ -template $I_{ref}$ \\
+\end{code}
+
+The \option{-trsf} implies that the transformation is in \textit{real frames} (i.e. the coordinates of the points are in real units, for instance millimeters). We recall that to a voxel point $M_{\mathbb{Z}} = (i,j,k)$ is associated a real point $M_{\mathbb{R}} = (x,y,z)$ through a conversion matrix $H_{I,\mathbb{R} \leftarrow \mathbb{Z}}$ (typically a diagonal matrix containing the voxel sizes along each direction).
+
+The \option{-voxel-trsf} allows to specify the transformation in \textit{voxel frames}. The transformation in the \textit{voxel frames}, $T_{I_{flo} \leftarrow I_{ref}, \mathbb{Z}}$ is obtained from the transformation in the \textit{real frames}, $T_{I_{flo} \leftarrow I_{ref}, \mathbb{R}}$, by multiplying it by the conversion matrices:
+$$
+T_{I_{flo} \leftarrow I_{ref}, \mathbb{Z}} 
+=
+H^{-1}_{I_{flo},\mathbb{R} \leftarrow \mathbb{Z}} \circ
+T_{I_{flo} \leftarrow I_{ref}, \mathbb{R}} \circ
+H_{I_{ref},\mathbb{R} \leftarrow \mathbb{Z}}
+$$
+Conversely,
+$$
+T_{I_{flo} \leftarrow I_{ref}, \mathbb{R}} 
+=
+H_{I_{flo},\mathbb{R} \leftarrow \mathbb{Z}} \circ
+T_{I_{flo} \leftarrow I_{ref}, \mathbb{Z}} \circ
+H^{-1}_{I_{ref},\mathbb{R} \leftarrow \mathbb{Z}}
+$$
+
+
+
+
+
+\section{\composeTrsf}
+
+
+\composeTrsf allows to compose a series of transformations. The transformations to be composed are introduced by the \option{-trsfs} option:
+\begin{code}{1}
+\% \composeTrsf ... -res $T_{res}$ -trsfs  $T_1$ $T_2$ ... $T_N$
+\end{code}
+
+
+Transformations are composed in the order they are given.
+The line \option{-trsfs $T_1$ $T_2$ ... $T_N$} assumes that the transformation
+$T_i$ goes from image $I_{i+1}$ to image $I_{i}$ (then allows to resample
+$I_{i}$ in the same frame than $I_{i+1}$), i.e.  
+$$T_{i} = T_{I_{i} \leftarrow I_{i+1}}$$
+The resulting transformation will goes from $I_{N+1}$ to $I_1$ 
+(then allows to resample $I_1$ in the same frame than $I_{N+1}$). Thus 
+\begin{code}{1}
+\% \composeTrsf ... -res $T_{res}$ -trsfs  $T_1$ $T_2$ ... $T_N$
+\end{code}
+computes
+\begin{eqnarray*}
+T_{res} & = & T_1 \circ T_2 \circ ... \circ T_N \\
+& = & T_{I_{1} \leftarrow I_{2}} \circ  
+      T_{I_{2} \leftarrow I_{3}} \circ  ... \circ 
+      T_{I_{N} \leftarrow I_{N+1}} \\
+& = & T_{I_{1} \leftarrow I_{N+1}} \\
+\end{eqnarray*}
+
+
+\noindent{\textbf{Example:}} the following series of resampling
+\begin{code}{1}
+\% \applyTrsf $I_0$ $I_1$ -trsf $T_0$ ... \\
+\% \applyTrsf $I_1$ $I_2$ -trsf $T_1$ ... \\
+\% \applyTrsf $I_2$ $I_3$ -trsf $T_2$ ...
+\end{code}
+is equivalent to the transformation composition
+\begin{code}{1}
+\% \composeTrsf -res $T_{I_0 \leftarrow I_3}$ -trsfs $T_0$ $T_1$ $T_2$
+\end{code}
+that allows to get $I_3$ directly from $I_0$
+\begin{code}{1}
+\% \applyTrsf $I_0$ $I_3$ -trsf $T_{I_0 \leftarrow I_3}$ ... 
+\end{code}
+
+
+
+
+
+\section{\copyTrsf}
+
+
+\copyTrsf allows to copy a transformation from one type to an other or/and to convert it from \textit{real units} to \textit{voxel units} or conversely.
+
+The command
+\begin{code}{0.8}
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ -res $I_{res}$ -res-trsf $T_{res,\mathbb{R}}$ -res-voxel-trsf $T_{res,\mathbb{Z}}$ ...
+\end{code}
+allows to register the image $I_{flo}$ onto $I_{ref}$ and computes the transformation 
+$T_{res,\mathbb{R}}$ (in real units) that allows to resample $I_{flo}$ in the same frame tham $I_{ref}$, the transformation $T_{res,\mathbb{Z}}$ being $T_{res,\mathbb{R}}$ expressed in voxel units).
+
+The conversion from \textit{real} to \textit{voxel} units can also be achieved by 
+\begin{code}{0.8}
+\% \copyTrsf $T_{res,\mathbb{R}}$ $T_{res,\mathbb{Z}}$ -floating $I_{flo}$ -template $I_{ref}$ -input-unit real -output-unit voxel
+\end{code}
+while the conversion from \textit{voxel} to \textit{real} units can also be achieved by 
+\begin{code}{0.8}
+\% \copyTrsf $T_{res,\mathbb{Z}}$ $T_{res,\mathbb{R}}$ -floating $I_{flo}$ -template $I_{ref}$ -input-unit voxel -output-unit real
+\end{code}
+
+\copyTrsf can also be used to copy a linear transformation $T_{linear}$, expressed as a matrice, in a vector field, $T_{vector}$. It is mandatory to provide a template image that defines the geometry of the vector field (which is nothing but a vectorial image).
+
+\begin{code}{0.8}
+\% \copyTrsf $T_{linear}$ $T_{vector}$  -template $I_{ref}$ -trsf-type vectorfield[2D,3D]
+\end{code}
+
+
+
+
+
+
+\section{\createGrid}
+
+\createGrid creates an image containing a grid, which can be useful to "visualize" transformations or deformations.
+
+
+\noindent{\textbf{Example:}} the following registration has been ran
+\begin{code}{1}
+\% \blockmatching -flo $I_{flo}$ -ref $I_{ref}$ ... -res-trsf $T_{res}$ -res $I_{res}$
+\end{code}
+One can create a grid image having the same geometry than $I_{flo}$ (thanks to \option{-template $I_{flo}$})
+\begin{code}{1}
+\% \createGrid $I_{grid}$ -template $I_{flo}$ 
+\end{code}
+and use $T_{res}$ to resample this grid image into the geometry of $I_{ref}$ (thanks to \option{-template $I_{ref}$})
+\begin{code}{1}
+\% \applyTrsf $I_{grid}$ $I_{resampled\_grid}$ -trsf $T_{res}$ -template $I_{ref}$ 
+\end{code}
+$I_{resampled\_grid}$ exhibits the same transformation/deformation with respect to $I_{grid}$ than 
+$I_{res}$ with respect to $I_{flo}$.
+
+
+
+
+
+\section{\cropImage}
+
+\cropImage allows to crop an image. As a side result, it can also write the transformation "summarizing" the crop.
+
+\noindent{\textbf{Example:}}
+the following command crops, from $I_{ref}$ ,a subvolume $J_{ref}$ of dimensions $[100,90,80]$ from the point $(25, 35, 45)$ [by convention, the default origin is (0,0,0)].
+\begin{code}{0.8}
+\% \cropImage $I_{ref}$ $J_{ref}$ -origin 25 35 45 -dim 100 90 80 -res-trsf $C_{ref}$
+\end{code}
+The transformation $C_{ref}$ defines the "crop" operation as a transformation,
+i.e. $J_{ref} = I_{ref} \circ C_{ref}$, this the same "crop" can also be done by 
+\begin{code}{0.8}
+\% \applyTrsf $I_{ref}$ $J_{ref}$ -trsf $C_{ref}$ -dim 100 90 80 -voxel ...
+\end{code}
+according one specifies the correct voxel sizes. In other words, we have 
+$$ J_{ref} = I_{ref} \circ C_{ref}$$
+
+This allows to compute a registration transformation from subvolumes,
+and then to estimate the transformation for the whole volumes. 
+
+\begin{enumerate}
+
+\item The commands
+\begin{code}{0.8}
+\% \cropImage $I_{ref}$ $J_{ref}$ ... -res-trsf $C_{ref}$ \\
+\% \cropImage $I_{flo}$ $J_{flo}$ ... -res-trsf $C_{flo}$
+\end{code}
+generates the subvolumes $J_{ref} = I_{ref} \circ C_{ref}$ and $J_{flo} = I_{flo} \circ C_{flo}$ together with the crop transformations $C_{ref}$ and $C_{flo}$.
+
+\item The cropped images are co-registered, i.e. $J_{flo}$ can be registered onto $J_{ref}$ with 
+\begin{code}{0.8}
+\% \blockmatching -flo $J_{flo}$ -ref $J_{ref}$ -res $J_{res}$ -res-trsf ${T'}_{res}$ ...
+\end{code}
+
+\item The resampling of the cropped image $J_{flo}$ into $J_{res}$
+  with ${T'}_{res}$ can cause some zeroed areas appearing at the
+  $J_{res}$ image border. 
+Since we have 
+\begin{eqnarray*}
+J_{res} & = & J_{flo} \circ {T'}_{res} \\
+        & = & I_{flo} \circ C_{flo}  \circ {T'}_{res} 
+\end{eqnarray*}
+this effect can be reduced by resampling $I_{flo}$ into $J_{res}$ with
+the transformation $C_{flo}  \circ {T'}_{res}$
+
+\begin{code}{0.8}
+\% \composeTrsf -res $T''_{res}$ -trsfs $C_{flo}$  ${T'}_{res}$ \\
+\% \applyTrsf $I_{flo}$ $J_{res}$ -trsf $T''_{res}$ -template $J_{ref}$ 
+\end{code}
+
+\item Last, we also have
+\begin{eqnarray*}
+J_{res} = J_{flo} \circ {T'}_{res} & \sim & J_{ref} \\
+I_{flo} \circ C_{flo} \circ {T'}_{res} & \sim &  I_{ref} \circ C_{ref} \\
+I_{flo} \circ C_{flo} \circ {T'}_{res} \circ C^{-1}_{ref} & \sim & I_{ref}
+\end{eqnarray*}
+thus $T_{res} = C_{flo} \circ {T'}_{res} \circ C^{-1}_{ref}$ allows to
+resample $I_{flo}$ onto $I_{ref}$, with a transformation ${T'}_{res}$
+computed by the co-registration of the cropped images $J_{flo}$ and $J_{ref}$.
+
+\begin{code}{0.8}
+\% \invTrsf $C_{ref}$ $C^{-1}_{ref}$  \\
+\% \composeTrsf -res $T_{res}$ -trsfs $C_{flo}$  ${T'}_{res}$ $C^{-1}_{ref}$ \\
+\% \applyTrsf $I_{flo}$ $I_{res}$ -trsf $T_{res}$ -template $I_{ref}$ 
+\end{code}
+
+\end{enumerate}
+
+
+
+
+\section{\invTrsf}
+
+\section{\printTrsf}
+
+
+
+%\newpage
+%\chapter{Examples}
+
+%\section{}
+
+
+
+
+\newpage
+\chapter{Developper documentation / Notes}
+
+\section{Frame conversion: \textit{real} $\leftrightarrow$ \textit{voxel}}
+
+\subsection{Image}
+
+Every image $I$ is associated with a conversion matrix. Basically, it is simply a diagonal matrix with the voxel sizes (or their inverses) along the diagonal. Let $(v_x, v_y, v_z)$ be the voxel size of image $I$, thus a point $M_{\mathbb{R}} = (x,y,z)$ in the real frame $\mathbb{R}$ correspond to the voxel point $M_{\mathbb{Z}} = (i,j,k)$ in the voxel frame $\mathbb{Z}$ with
+$$M_{\mathbb{R}} = H_{I,\mathbb{R} \leftarrow \mathbb{Z}} M_{\mathbb{Z}}
+\quad \mbox{ with } \quad
+H_{I,\mathbb{R} \leftarrow \mathbb{Z}} = \left( \begin{array}{ccc}
+v_x & . & . \\
+. & v_y & .\\
+. & . & v_z
+\end{array} \right)
+$$
+Accordingly,
+$$M_{\mathbb{Z}} = H_{I,\mathbb{Z} \leftarrow \mathbb{R}} M_{\mathbb{R}}
+\quad \mbox{ with } \quad
+H_{I,\mathbb{Z} \leftarrow \mathbb{R}} = \left( \begin{array}{ccc}
+1/v_x & . & . \\
+. & 1/v_y & .\\
+. & . & 1/v_z
+\end{array} \right)
+$$
+Obviously, we have $H_{I,\mathbb{Z} \leftarrow \mathbb{R}} = H^{-1}_{I,\mathbb{R} \leftarrow \mathbb{Z}}$.
+
+
+
+\subsection{Transformations}
+
+We simply use the composition rules to express the \textit{voxel} transformation from image $I_{ref}$ to image $I_{flo}$, $T_{flo \leftarrow ref, \mathbb{Z}} = T_{flo_\mathbb{Z} \leftarrow ref_\mathbb{Z}}$ from the same transformation in the real frame, 
+$T_{flo \leftarrow ref, \mathbb{R}} = T_{flo_\mathbb{R} \leftarrow ref_\mathbb{R}}$.
+
+$$
+T_{flo \leftarrow ref, \mathbb{Z}} 
+=
+H_{flo,\mathbb{Z} \leftarrow \mathbb{R}} \circ
+T_{flo \leftarrow ref, \mathbb{R}} \circ
+H_{ref,\mathbb{R} \leftarrow \mathbb{Z}}
+$$
+Conversely,
+$$
+T_{flo \leftarrow ref, \mathbb{R}} 
+=
+H_{flo,\mathbb{R} \leftarrow \mathbb{Z}} \circ
+T_{flo \leftarrow ref, \mathbb{Z}} \circ
+H_{ref,\mathbb{Z} \leftarrow \mathbb{R}}
+$$
+
+\subsection{Linear transformations}
+
+The composition is quite trivial, since it only uses matrices multiplication.
+
+\subsection{Vector fields}
+
+The transformation is encoded by a vector field $\mathbf{V}$ that indicates the displacement at every point. For a transformation from image $I_{ref}$ to image $I_{flo}$, this vector is defined on the same frame than $I_{ref}$. Thus the vector in \textit{real} coordinates $\mathbf{V}_{\mathbb{R}}$ at $M_{\mathbb{R}}$ gives the displacement of the point $M_{\mathbb{R}}$.
+
+However, since $\mathbf{V}$ is defined over a discrete lattice, the vector image stores the vectors $\mathbf{V}_{\mathbb{R}}(M_{\mathbb{Z}})$, thus $\mathbf{V}_{\mathbb{R}}$ at $M_{\mathbb{R}}$ is $\mathbf{V}_{\mathbb{R}}( H_{\mathbb{Z} \leftarrow \mathbb{R}} M_{\mathbb{R}} )$.
+
+The transformation $T$ from image $I_{ref}$ to image $I_{flo}$ is then defined by
+\begin{eqnarray*}
+&&
+M_{flo,\mathbb{R}} = 
+T(M_{ref,\mathbb{R}}) = M_{ref,\mathbb{R}} + \mathbf{V}_{\mathbb{R}}( H_{ref, \mathbb{Z} \leftarrow \mathbb{R}} M_{ref,\mathbb{R}} )\\
+& \Leftrightarrow &
+\mathbf{V}_{\mathbb{R}}( H_{ref, \mathbb{Z} \leftarrow \mathbb{R}} M_{ref,\mathbb{R}} )
+= M_{flo,\mathbb{R}} - M_{ref,\mathbb{R}}
+= T(M_{ref,\mathbb{R}}) - M_{ref,\mathbb{R}}
+\end{eqnarray*}
+
+When expressing this formula in the discrete lattice, it comes
+\begin{eqnarray*}
+ H_{flo, \mathbb{R} \leftarrow \mathbb{Z}} M_{flo,\mathbb{Z}}
+ & = & 
+ H_{ref, \mathbb{R} \leftarrow \mathbb{Z}} M_{ref,\mathbb{Z}}
+ + \mathbf{V}_{\mathbb{R}}( M_{ref,\mathbb{Z}} ) \\
+ M_{flo,\mathbb{Z}} 
+ &= &
+ H^{-1}_{flo, \mathbb{R} \leftarrow \mathbb{Z}}
+ \circ H_{ref, \mathbb{R} \leftarrow \mathbb{Z}} M_{ref,\mathbb{Z}}
+ + H^{-1}_{flo, \mathbb{R} \leftarrow \mathbb{Z}}
+ \circ \mathbf{V}_{\mathbb{R}}( M_{ref,\mathbb{Z}} )
+\end{eqnarray*}
+
+The displacement in \textit{voxel} coordinates $\mathbf{V}_{\mathbb{Z}}$ is then defined by
+\begin{eqnarray*}
+\mathbf{V}_{\mathbb{Z}}( M_{ref,\mathbb{Z}} )
+& = & M_{flo,\mathbb{Z}} - M_{ref,\mathbb{Z}} \\
+& = & 
+\left( H^{-1}_{flo, \mathbb{R} \leftarrow \mathbb{Z}}
+ \circ H_{ref, \mathbb{R} \leftarrow \mathbb{Z}} - \mathbf{Id} \right)
+ M_{ref,\mathbb{Z}}
+ + H^{-1}_{flo, \mathbb{R} \leftarrow \mathbb{Z}}
+ \circ \mathbf{V}_{\mathbb{R}}( M_{ref,\mathbb{Z}} )
+\end{eqnarray*}
+(where $\mathbf{Id}$ denotes the identity matrix) and may be different from a simple scaling of the vector field defined in \textit{real} coordinates.
+
+
+
+
+\section{\blockmatching versus \baladin}
+
+\subsection{Blocks management}
+
+There are two issues.
+
+\begin{itemize}
+
+\item The number of blocks calculated in the earlier versions of \baladin was erroneous (and may yield an overflow). 
+\item As a consequence, some blocks (that should have been considered) were discarded.
+\item the ordering of the blocks in the earlier versions of \baladin was $z$ varies first, then $y$ and finally $x$, so that the index of a block is given by $z + ( y + x * dim_y) * dim_z$. 
+
+\end{itemize}
+
+This behavior can be mimicked with the define \verb|_ORIGINAL_BALADIN_BLOCKS_MANAGEMENT_| in the latest version of \baladin (except for the overflow). 
+
+It seems that the indexing order is important (experiments have been conducted by changing the indexing, with the same blocks being discarded), since results may numerically differ. It can be suspected (but has not be proven) that it may change the "best" pairing, because of the scan order, when several blocks result in the same criteria value.
+
+
+
+\newpage
+\chapter{Misc}
+
+
+\section{Blocs}
+
+\subsection{D\'efinition des blocs}
+
+La dimension d'une image est $D$ (les coordonn\'ees des points vont de $0$ \`a $D-1$), on ne veut pas de blocs dans les $\textit{offset}_p$ premiers points, ni dans les $\textit{offset}_d$ derniers points. La dimension d'un bloc est $B$ 
+et les blocs sont espac\'es de $S$. On a donc 
+\begin{itemize}
+\item coordonn\'ee du premier point inclus dans le bloc $i , i\geq 0$ : 
+$$x_0 = \textit{offset}_p + i * S$$ 
+Donc le point $x$ est le premier point (origine) d'un bloc si
+$$(x - \textit{offset}_p) \% S = 0$$ 
+(le reste de la division euclidienne est $0$), et l'indice du bloc est alors  
+$$(x - \textit{offset}_p) / S$$
+\item coordonn\'ee du dernier point inclus dans le bloc $i$ : 
+$$x_1 = \textit{offset}_p + i * S + (B-1)$$
+\end{itemize}
+Pour qu'un bloc soit valide, il faut donc 
+\begin{eqnarray*}
+\textit{offset}_p + i * S + (B-1) \leq D - 1 - \textit{offset}_d
+& \Longleftrightarrow &
+i * S \leq D - 1 - \textit{offset}_d -B +1 - \textit{offset}_p \\
+i * S \leq D-B - \textit{offset}_d - \textit{offset}_p
+\end{eqnarray*}
+Le dernier indice valide est donc 
+$$
+i_d = \left( D-B - \textit{offset}_d - \textit{offset}_p \right) / S
+$$
+Comme les indices commencent \`a $0$, il y a donc $i_d +1$ blocs avec
+$$
+i_d + 1 = \left( D-B - \textit{offset}_d - \textit{offset}_p \right) / S + 1
+$$
+
+
+
+\section{Recalage}
+
+\subsection{Transformation initiale}
+
+Si une transformation initiale $T_{init}$ est donn\'ee, elle est utilis\'ee pour une premi\`ere transformation de l'image flottante. Typiquement, c'est la transformation r\'esultat d'un premier recalage.
+Cela revient donc \`a recaler $I_{flo} \circ T_{init}$ avec $I_{ref}$.
+
+\subsection{Boucle de recalage}
+
+Dans chaque boucle de recalage, \`a l'it\'eration $i$, on cherche \`a recaler $I_{flo}^i = I_{flo}^0 \circ T^i $ avec $T_{ref}$, et on calcule ${\delta}T^i = T_{I_{flo}^i \leftarrow I_{ref}}$.
+On a donc 
+$$
+T^{i+1} = {\delta}T^i \circ T^i
+$$
+
+S'il y a une transformation initiale, on a $I_{flo}^0 = I_{flo} \circ T_{init}$, donc la transformation pour r\'e\'echantillonner $I_{flo}^i$ \`a partir de $I_{flo}$ est $T_{init} \circ T^i$.
+
+
+
+
+\section{Transformations}
+
+\section{Passage d'une transformation "r\'eelle" en "voxels"}
+
+\subsection{Passage d'un r\'ef\'erentiel voxel \`a un r\'ef\'erentiel r\'eel}
+
+$H_{\ens{ref}{R}{ref}{Z}}$ : matrice diagonale des tailles de voxel, permet de passer d'un r\'ef\'erentiel voxel \`a un r\'ef\'erentiel r\'eel
+
+$$H_{\ens{ref}{R}{ref}{Z}} = \left( \begin{array}{ccc}
+v_x & . & . \\
+. & v_y & .\\
+. & . & v_z
+\end{array} \right)
+\quad \mbox{ et } \quad
+H_{\ens{ref}{Z}{ref}{R}} = \left( \begin{array}{ccc}
+1/v_x & . & . \\
+. & 1/v_y & .\\
+. & . & 1/v_z
+\end{array} \right)
+$$
+o\`u $v_x$, $v_y$ et $v_z$ sont les dimensions du voxels selon les 3 directions.
+On a donc 
+$$
+(x,y,z)^t = H_{\ens{ref}{R}{ref}{Z}} (i,j,k)^t
+$$
+
+\subsection{Transformation lin\'eaire}
+
+On passe de la transformation "r\'eelle" $T_{\ens{flo}{R}{ref}{R}}$
+\`a une transformation "voxels"  $T_{\ens{flo}{Z}{ref}{Z}}$ par
+$$
+T_{\ens{flo}{Z}{ref}{Z}} = 
+H_{\ens{flo}{Z}{flo}{R}} \circ 
+T_{\ens{flo}{R}{ref}{R}} \circ
+H_{\ens{ref}{R}{ref}{Z}}
+$$
+C'est la transformation qui permet, en pratique, de r\'e\'echantillonner l'image $flo$ dans la g\'eom\'etrie de l'image $ref$.
+
+\subsection{Transformation non-lin\'eaire}
+
+Elle est cod\'ee par une image de vecteurs $\mathbf{V}_{\ens{flo}{R}{ref}{Z}}$, donc d\'efinie sur une image, a priori, $I_{ref}$ pour pouvoir r\'e\'echantillonner l'image flottante dans la g\'eom\'etrie de l'image r\'ef\'erence.
+
+Ces vecteurs sont un d\'eplacement dans le monde r\'eel, qui indique de combien un voxel se d\'eplace.
+La transformation dans le r\'ef\'erentiel r\'eel se d\'efinit donc par
+$$
+T_{\ens{flo}{R}{ref}{R}}(x,y,z) = (x,y,z) 
++ \mathbf{V}_{\ens{flo}{R}{ref}{Z}} \left( H^{-1}_{\ens{ref}{R}{ref}{Z}}(x,y,z) \right)
+$$
+
+La transformation dans le r\'ef\'erentiel voxel se d\'efinit donc par
+$$
+T_{\ens{flo}{Z}{ref}{Z}}(i,j,k) = 
+H^{-1}_{\ens{flo}{Z}{flo}{R}}  \circ H_{\ens{ref}{R}{ref}{Z}} (i,j,k) 
++ H^{-1}_{\ens{flo}{Z}{flo}{R}}  \mathbf{V}_{\ens{flo}{R}{ref}{Z}} (i,j,k)
+$$
+
+\section{Calcul d'une transformation aux moindres carrées}
+
+\subsection{Rappels}
+\begin{eqnarray*}
+\sum_i \left( x_i - \bar{x} \right)^2 
+& = &
+\sum_i \left( x_i^2 - 2 x_i \bar{x} + \bar{x}^2 \right) \\
+& = &
+\sum_i x_i^2 - 2 \bar{x} \sum_i x_i + N \bar{x}^2 \\
+& = &
+\sum_i x_i^2 - 2 \bar{x} N \bar{x} + N \bar{x}^2 \\
+& = &
+\sum_i x_i^2 - N \bar{x}^2 
+\end{eqnarray*}
+
+\begin{eqnarray*}
+\sum_i \left( x_i - \bar{x} \right) \left( x'_i - \bar{x}' \right) 
+& = &
+\sum_i x_i x'_i - \bar{x} \sum_i x'_i - \bar{x}' \sum_i x_i + N \bar{x} \bar{x}' \\
+& = &
+\sum_i x_i x'_i - \bar{x} N \bar{x}' - \bar{x}' N \bar{x} + N \bar{x} \bar{x}' \\
+& = &
+\sum_i x_i x'_i - N \bar{x} \bar{x}'
+\end{eqnarray*}
+
+\subsection{Translation + scaling}
+
+Le crit\`ere est de la forme
+$$
+\sum_i \left( a_x x_i + t_x - x'_i \right)^2 + \ldots
+$$
+
+La d\'eriv\'ee par rapport \`a $t_x$ donne
+\begin{eqnarray*}
+\sum_i \left( a_x x_i + t_x - x'_i \right) = 0
+& \Longleftrightarrow &
+a_x \sum_i x_i + N t_x - \sum_i x'_i = 0 \\
+& \Longleftrightarrow &
+t_x = \bar{x}' - a_x \bar{x} 
+\end{eqnarray*}
+
+La d\'eriv\'ee par rapport \`a $a_x$ donne
+\begin{eqnarray*}
+\sum_i x_i \left( a_x x_i + t_x - x'_i \right) = 0
+& \Longleftrightarrow &
+a_x \sum_i x_i^2 + t_x \sum_i x_i - \sum_i x_i x'_i = 0\\
+& \Longleftrightarrow &
+a_x \sum_i x_i^2 +
+N \bar{x} \left( \bar{x}' - a_x \bar{x} \right) - \sum_i x_i x'_i = 0\\
+& \Longleftrightarrow &
+a_x \left( \sum_i x_i^2 - N \bar{x}^2 \right)
++ N \bar{x} \bar{x}' - \sum_i x_i x'_i = 0 \\
+& \Longleftrightarrow &
+a_x \sum_i \left( x_i - \bar{x} \right)^2  
+ - \sum_i \left( x_i - \bar{x} \right)\left( x'_i - \bar{x}' \right) \\
+& \Longleftrightarrow &
+a_x = \frac{\sum_i \left( x_i - \bar{x} \right)\left( x'_i - \bar{x}' \right)}{\sum_i \left( x_i - \bar{x} \right)^2}
+\end{eqnarray*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\chapter{Misc}
+
+\section{Notes}
+
+
+
+\subsection{Block\_Matching()}
+
+Arguments
+\begin{itemize}
+\item image $I^p_{ref}$ dans la g\'eom\'etrie sous-\'echantillonn\'ee (niveau $p$ de la pyramide)
+\item image $I_flo$ dans la g\'eom\'etrie initiale
+\item transformation permettant de passer de $I^p_{ref}$ \`a  $I_{flo}$.
+\begin{itemize}
+\item cas lin\'eaire : c'est 
+$$ 
+T_{\ens{flo}{R}{ref^p}{R}}
+$$
+et le r\'e\'echantillonnage se fait avec 
+$$ 
+H_{\ens{flo}{Z}{flo}{R}} \circ
+T_{\ens{flo}{R}{ref^p}{R}} \circ 
+H_{\ens{ref^p}{R}{ref^p}{Z}}
+$$
+\item cas non-lin\'eaire : c'est une image vectorielle $\mathbf{V}^p$ d\'efinie sur la m\^eme grille que $I^p_{ref}$
+$$
+T_{\ens{flo}{Z}{ref}{Z}}(i,j,k) = 
+H^{-1}_{\ens{flo^p}{Z}{flo}{R}}  \circ H_{\ens{ref}{R}{ref^p}{Z}} (i,j,k) 
++ H^{-1}_{\ens{flo}{Z}{flo}{R}}  \mathbf{V}^p_{\ens{flo}{R}{ref^p}{Z}} (i,j,k)
+$$
+\end{itemize}
+
+
+\item Allocation d'une image $I^p_{flo}$ de m\^eme g\'eometrie que $I^p_{ref}$
+\item Allocation de la liste des blocs 
+\begin{itemize}
+\item Pour les non-lin\'eaires, les tailles de blocs doivent \^etre impairs
+\end{itemize}
+\item Calcul des param\`etres de blocs pour $I^p_{ref}$
+
+\item Boucle
+
+
+
+
+\begin{enumerate}
+
+\item R\'e\'echantillonnage de $I_{flo}$ en $I^i_{flo}$ ($i$ : it\'eration) avec 
+
+\item Calcul des param\`etres de blocs pour $I^i_{flo}$
+
+\item Tri des blocs pour $I^i_{flo}$
+
+\item Calcul des appariements entre les blocs pour $I^i_{flo}$ et ceux de $I^p_{ref}$
+
+\item Calcul de la transformation incrémentale
+$\delta T_{\ens{flo^i}{}{ref^p}{}}$ 
+\begin{itemize}
+\item cas lin\'eaire : c'est une transformation dans le r\'ef\'erentiel r\'eel
+$$\delta T_{\ens{flo^i}{R}{ref^p}{R}}$$
+\item cas non-lin\'eaire : c'est un champ de vecteurs
+$\delta\mathbf{V}_{\ens{flo^i}{R}{ref^p}{Z}}$
+\end{itemize}
+
+\item Mise \`a jour de la  transformation 
+$T_{\ens{flo^i}{}{ref^p}{}}$ 
+\begin{itemize}
+\item cas lin\'eaire : C'est une transformation dans le r\'ef\'erentiel r\'eel
+$$
+T_{\ens{flo^{i+1}}{R}{ref^p}{R}} = 
+\delta T_{\ens{flo^i}{R}{ref^p}{R}} \circ T_{\ens{flo^i}{}{ref^p}{}} 
+$$
+\item cas non-lin\'eaire :
+\begin{eqnarray*}
+\mathbf{V}_{\ens{flo^{i+1}}{R}{ref^p}{Z}} (i,j,k) & = &
+\mathbf{V}_{\ens{flo^{i}}{R}{ref^p}{Z}} (i,j,k) \\
+&& + 
+\delta\mathbf{V}_{\ens{flo^i}{R}{ref^p}{Z}} 
+\left( (i,j,k) + H^{-1}_{\ens{flo}{Z}{flo}{R}} \mathbf{V}_{\ens{flo^{i}}{R}{ref^p}{Z}} (i,j,k) \right)
+\end{eqnarray*}
+
+\end{itemize}
+
+\end{enumerate}
+\end{itemize}
+
+
+
+\subsection{Pyramidal block matching}
+
+
+
+\begin{enumerate}
+
+\item Construction des parametres pour chaque niveau
+
+\item Boucle sur les niveau
+
+\begin{enumerate}
+\item Allocation de la transformation du niveau
+\item matrice de reechantillonnage
+\item reechantillonnage de l'image de reference
+\item reechantillonnage de la transformation courante a la transformation du niveau
+\item filtrage eventuel de l'image flottante
+\item recalage
+\item reechantillonnage de la transformation resultat a la transformation courante
+\item liberation memoire
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+
+
+\newpage
+\section{Pyramidal\_Block\_Matching()}
+
+\begin{enumerate}
+
+\item Initialisation de la transformation. R\'e\'echantillonnage de flo vers ref.
+$$ Tr\_result = T_{ref \leftarrow flo}$$
+J'aurai vu l'inverse. 
+
+\item Contr\^ole sur la taille du voisinage d'exploration.
+
+\item Calcul du nombre de niveau de la pyramide
+
+\item Allocation d'une image en cas de pyramide filtr\'ee.
+
+\item Pyramide
+
+\begin{enumerate}
+
+\item Mise \`a jour des paramètres (pas au 1e niveau)
+
+\item Calcul de l'image ref sous-\'echantillonn\'ee et de la matrice de sous-
+'echantillonnage de ref vers ref\_sub
+
+\item Lissage \'eventuel de l'image flottante
+
+\item Appel de Block\_Matching() 
+la matrice de transformation est en coordonn\'ees voxel de ref vers flo
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+\section{Block\_Matching()}
+
+Pourquoi on passe le type de Inrimage\_flo ?
+
+\begin{enumerate}
+
+\item Composition de la matrice de sous-\'echantillonnage avec 
+
+\end{enumerate}
+
+
+
+
+\section{Fonctions}
+
+\subsection{ChangeGeometryTransformation(), transformation.h}
+
+\section{Notes}
+
+\begin{itemize}
+
+\item  la position du centre d'un bloc (cf CalculChampVecteur2D() et CalculChampVecteur3D()) est donn\'ee par 
+$x = a + param->bl\_dx / 2.0$ avec $a$ origine du bloc, et $param->bl\_dx$ taille du bloc. Etant donn\'e que $a$ est au centre du bloc, il aurait fallu faire 
+$x = a + (param->bl\_dx -1)/ 2.0$ !! [DONE]
+
+\item dans CalculChampVecteur3D(), la taille du voisinage est de -$param->bl\_size\_neigh\_x$ a $+param->bl\_size\_neigh\_x$, et on parcourt le voisinage a partir de $a - param->bl\_size\_neigh\_x$ et en avan\c{c}ant de $param->bl_next_neigh_x$, ce qui fait que l'on ne teste pas forc\'ement le point central (ex: size = 3 et step = 2). A corriger.
+
+\item Le calcul des r\'esidus devrait se faire par une distance de Mahalanobis. 
+\begin{itemize}
+\item Paires : $(M_i, M'_i)$
+\item Transformation estim\'ee : $T = \arg \min \sum_i \| T \circ M_i - M'_i \|^2$
+\item vecteurs r\'esidus : $\mathbf{r}_i = T \circ M_i - M'_i$
+\item moyenne des r\'esidus : 
+$\overline{\mathbf{r}} = \frac{1}{N} \sum_i \mathbf{r}_i$
+\item matrice de covariance des r\'esidus : 
+$C = \frac{1}{N} \sum_i (\mathbf{r}_i - \overline{\mathbf{r}}) (\mathbf{r}_i- \overline{\mathbf{r}})^T$
+\item la distance de Mahalanobis s'\'ecrit 
+$(\mathbf{r}_i- \overline{\mathbf{r}})^T C^{-1} (\mathbf{r}_i- \overline{\mathbf{r}})$
+
+\end{itemize}
+Maintenant, il faudrait calculer la distance par rapport \`a un r\'esidu nul...
+
+
+
+
+
+\item tools = outils, basic = allocation, initialisation, ...
+
+\item transformation\_type n'a pas \`a \^etre dans les param\`etres de recalage, juste dans les param\`etres locaux du 'main'
+
+\end{itemize}
+
+
+
+
+
+\end{document}

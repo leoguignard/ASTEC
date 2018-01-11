@@ -1,0 +1,35 @@
+----- RESULTS -----
+          6561 tested configurations 
+ 6561 / 6561 tested configurations first permutation was:
+ {0,0,0,0,0,0,0,0}
+ next permutation is:
+ {0,0,0,0,0,0,0,0}
+ T-- = 0   T- = 0   T+ = 1   T++ = 1   #configurations =            81 minimal -> well
+ T-- = 0   T- = 1   T+ = 1   T++ = 0   #configurations =            16 minimal+maximal=interior
+ T-- = 0   T- = 1   T+ = 1   T++ = 1   #configurations =           716 minimal+constructible
+ T-- = 0   T- = 2   T+ = 1   T++ = 2   #configurations =           438 minimal+convergent
+ T-- = 0   T- = 3   T+ = 1   T++ = 3   #configurations =            44 minimal+convergent
+ T-- = 0   T- = 4   T+ = 1   T++ = 4   #configurations =             1 minimal+convergent
+ T-- = 1   T- = 1   T+ = 0   T++ = 0   #configurations =             1 maximal -> peak
+ T-- = 1   T- = 1   T+ = 1   T++ = 0   #configurations =           116 maximal+destructible
+ T-- = 1   T- = 1   T+ = 1   T++ = 1   #configurations =          1672 destructible+constructible=simple side
+ T-- = 1   T- = 2   T+ = 1   T++ = 2   #configurations =          1168 destructible+convergent
+ T-- = 1   T- = 3   T+ = 1   T++ = 3   #configurations =           144 destructible+convergent
+ T-- = 1   T- = 4   T+ = 1   T++ = 4   #configurations =             4 destructible+convergent
+ T-- = 2   T- = 1   T+ = 2   T++ = 0   #configurations =           102 maximal+divergent
+ T-- = 2   T- = 1   T+ = 2   T++ = 1   #configurations =           688 constructible+divergent
+ T-- = 2   T- = 2   T+ = 2   T++ = 2   #configurations =           868 convergent+divergent=saddle point
+ T-- = 2   T- = 3   T+ = 2   T++ = 3   #configurations =           160 convergent+divergent=saddle point
+ T-- = 2   T- = 4   T+ = 2   T++ = 4   #configurations =             6 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 0   #configurations =            20 maximal+divergent
+ T-- = 3   T- = 1   T+ = 3   T++ = 1   #configurations =            96 constructible+divergent
+ T-- = 3   T- = 2   T+ = 3   T++ = 2   #configurations =           136 convergent+divergent=saddle point
+ T-- = 3   T- = 3   T+ = 3   T++ = 3   #configurations =            64 convergent+divergent=saddle point
+ T-- = 3   T- = 4   T+ = 3   T++ = 4   #configurations =             4 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 4   T++ = 0   #configurations =             1 maximal+divergent
+ T-- = 4   T- = 1   T+ = 4   T++ = 1   #configurations =             4 constructible+divergent
+ T-- = 4   T- = 2   T+ = 4   T++ = 2   #configurations =             6 convergent+divergent=saddle point
+ T-- = 4   T- = 3   T+ = 4   T++ = 3   #configurations =             4 convergent+divergent=saddle point
+ T-- = 4   T- = 4   T+ = 4   T++ = 4   #configurations =             1 convergent+divergent=saddle point
+                                                         -------------
+                                                         0000000006561

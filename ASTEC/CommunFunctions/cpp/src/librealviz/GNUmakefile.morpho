@@ -1,0 +1,22 @@
+
+SRC_MORPHO_TEMP = templates-morpho-src
+
+MORPHO_FILES = _predef_morpho.c 
+
+TARGETSTOBEDONE += ${MORPHO_FILES}
+
+_predef_morpho.c : ${SRC_MORPHO_TEMP}/predef-morpho.tpl
+	rm -f $@
+	@echo "... creating $@ from templates"
+	@sed -e "s/OPERATION/Dilation/g" -e "s/_TEST_/>/g" \
+	-e "s/_BINOP_/|/g" -e "s/TYPE/u8/g" \
+	${SRC_MORPHO_TEMP}/predef-morpho.tpl  >> $@
+	@sed -e "s/OPERATION/Dilation/g" -e "s/_TEST_/>/g" \
+	-e "s/_BINOP_/|/g" -e "s/TYPE/u16/g" \
+	${SRC_MORPHO_TEMP}/predef-morpho.tpl  >> $@
+	@sed -e "s/OPERATION/Erosion/g" -e "s/_TEST_/</g" \
+	-e "s/_BINOP_/\&/g" -e "s/TYPE/u8/g" \
+	${SRC_MORPHO_TEMP}/predef-morpho.tpl  >> $@
+	@sed -e "s/OPERATION/Erosion/g" -e "s/_TEST_/</g" \
+	-e "s/_BINOP_/\&/g" -e "s/TYPE/u16/g" \
+	${SRC_MORPHO_TEMP}/predef-morpho.tpl  >> $@

@@ -1,0 +1,366 @@
+ 2541865828329 / 2541865828329 tested configurations
+ first permutation was:
+ {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+ next permutation is:
+ {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+ T-- = 0   T- = 0   T+ = 1   T++ = 1   #configurations =    3486784401 minimal -> well
+ T-- = 0   T- = 1   T+ = 1   T++ = 0   #configurations =       1048576 minimal+maximal=interior
+ T-- = 0   T- = 1   T+ = 1   T++ = 1   #configurations =  117077053822 minimal+constructible
+ T-- = 0   T- = 1   T+ = 1   T++ = 2   #configurations =   22650444208 minimal+convergent
+ T-- = 0   T- = 1   T+ = 1   T++ = 3   #configurations =    4581006976 minimal+convergent
+ T-- = 0   T- = 1   T+ = 1   T++ = 4   #configurations =     772061440 minimal+convergent
+ T-- = 0   T- = 1   T+ = 1   T++ = 5   #configurations =      93363712 minimal+convergent
+ T-- = 0   T- = 1   T+ = 1   T++ = 6   #configurations =       7260160 minimal+convergent
+ T-- = 0   T- = 1   T+ = 1   T++ = 7   #configurations =        286720 minimal+convergent
+ T-- = 0   T- = 1   T+ = 1   T++ = 8   #configurations =          4096 minimal+convergent
+ T-- = 0   T- = 2   T+ = 1   T++ = 1   #configurations =   63320427999 minimal
+ T-- = 0   T- = 2   T+ = 1   T++ = 2   #configurations =    1801846944 minimal+convergent
+ T-- = 0   T- = 2   T+ = 1   T++ = 3   #configurations =      81554688 minimal+convergent
+ T-- = 0   T- = 2   T+ = 1   T++ = 4   #configurations =       3981312 minimal+convergent
+ T-- = 0   T- = 2   T+ = 1   T++ = 5   #configurations =        124416 minimal+convergent
+ T-- = 0   T- = 3   T+ = 1   T++ = 1   #configurations =    8879596164 minimal
+ T-- = 0   T- = 3   T+ = 1   T++ = 2   #configurations =      39226032 minimal+convergent
+ T-- = 0   T- = 3   T+ = 1   T++ = 3   #configurations =        279936 minimal+convergent
+ T-- = 0   T- = 4   T+ = 1   T++ = 1   #configurations =     354357423 minimal
+ T-- = 0   T- = 4   T+ = 1   T++ = 2   #configurations =        139968 minimal+convergent
+ T-- = 0   T- = 5   T+ = 1   T++ = 1   #configurations =       3346110 minimal
+ T-- = 0   T- = 6   T+ = 1   T++ = 1   #configurations =          6561 minimal
+ T-- = 1   T- = 1   T+ = 0   T++ = 0   #configurations =             1 maximal -> peak
+ T-- = 1   T- = 1   T+ = 1   T++ = 0   #configurations =      25985144 maximal+destructible
+ T-- = 1   T- = 1   T+ = 1   T++ = 1   #configurations =  483448720382 destructible+constructible=simple side
+ T-- = 1   T- = 1   T+ = 1   T++ = 2   #configurations =  196646054844 destructible+convergent
+ T-- = 1   T- = 1   T+ = 1   T++ = 3   #configurations =   57498969728 destructible+convergent
+ T-- = 1   T- = 1   T+ = 1   T++ = 4   #configurations =   12306446152 destructible+convergent
+ T-- = 1   T- = 1   T+ = 1   T++ = 5   #configurations =    1754708418 destructible+convergent
+ T-- = 1   T- = 1   T+ = 1   T++ = 6   #configurations =     149203756 destructible+convergent
+ T-- = 1   T- = 1   T+ = 1   T++ = 7   #configurations =       6223184 destructible+convergent
+ T-- = 1   T- = 1   T+ = 1   T++ = 8   #configurations =         93792 destructible+convergent
+ T-- = 1   T- = 1   T+ = 2   T++ = 0   #configurations =       3626396 maximal
+ T-- = 1   T- = 1   T+ = 2   T++ = 1   #configurations =    2976519888 constructible
+ T-- = 1   T- = 1   T+ = 2   T++ = 2   #configurations =    5882001545 convergent
+ T-- = 1   T- = 1   T+ = 2   T++ = 3   #configurations =    3343940448 convergent
+ T-- = 1   T- = 1   T+ = 2   T++ = 4   #configurations =    1077330430 convergent
+ T-- = 1   T- = 1   T+ = 2   T++ = 5   #configurations =     204192800 convergent
+ T-- = 1   T- = 1   T+ = 2   T++ = 6   #configurations =      21415052 convergent
+ T-- = 1   T- = 1   T+ = 2   T++ = 7   #configurations =       1055680 convergent
+ T-- = 1   T- = 1   T+ = 2   T++ = 8   #configurations =         18276 convergent
+ T-- = 1   T- = 1   T+ = 3   T++ = 0   #configurations =        651784 maximal
+ T-- = 1   T- = 1   T+ = 3   T++ = 1   #configurations =      86602836 constructible
+ T-- = 1   T- = 1   T+ = 3   T++ = 2   #configurations =     284633688 convergent
+ T-- = 1   T- = 1   T+ = 3   T++ = 3   #configurations =     321677188 convergent
+ T-- = 1   T- = 1   T+ = 3   T++ = 4   #configurations =     147243144 convergent
+ T-- = 1   T- = 1   T+ = 3   T++ = 5   #configurations =      35211432 convergent
+ T-- = 1   T- = 1   T+ = 3   T++ = 6   #configurations =       4412504 convergent
+ T-- = 1   T- = 1   T+ = 3   T++ = 7   #configurations =        253224 convergent
+ T-- = 1   T- = 1   T+ = 3   T++ = 8   #configurations =          4968 convergent
+ T-- = 1   T- = 1   T+ = 4   T++ = 0   #configurations =        106054 maximal
+ T-- = 1   T- = 1   T+ = 4   T++ = 1   #configurations =       3671472 constructible
+ T-- = 1   T- = 1   T+ = 4   T++ = 2   #configurations =      15747528 convergent
+ T-- = 1   T- = 1   T+ = 4   T++ = 3   #configurations =      25330832 convergent
+ T-- = 1   T- = 1   T+ = 4   T++ = 4   #configurations =      17980391 convergent
+ T-- = 1   T- = 1   T+ = 4   T++ = 5   #configurations =       5588412 convergent
+ T-- = 1   T- = 1   T+ = 4   T++ = 6   #configurations =        848954 convergent
+ T-- = 1   T- = 1   T+ = 4   T++ = 7   #configurations =         56604 convergent
+ T-- = 1   T- = 1   T+ = 4   T++ = 8   #configurations =          1257 convergent
+ T-- = 1   T- = 1   T+ = 5   T++ = 0   #configurations =         13512 maximal
+ T-- = 1   T- = 1   T+ = 5   T++ = 1   #configurations =        223970 constructible
+ T-- = 1   T- = 1   T+ = 5   T++ = 2   #configurations =        938708 convergent
+ T-- = 1   T- = 1   T+ = 5   T++ = 3   #configurations =       1740256 convergent
+ T-- = 1   T- = 1   T+ = 5   T++ = 4   #configurations =       1614020 convergent
+ T-- = 1   T- = 1   T+ = 5   T++ = 5   #configurations =        734650 convergent
+ T-- = 1   T- = 1   T+ = 5   T++ = 6   #configurations =        144276 convergent
+ T-- = 1   T- = 1   T+ = 5   T++ = 7   #configurations =         11956 convergent
+ T-- = 1   T- = 1   T+ = 5   T++ = 8   #configurations =           316 convergent
+ T-- = 1   T- = 1   T+ = 6   T++ = 0   #configurations =          1180 maximal
+ T-- = 1   T- = 1   T+ = 6   T++ = 1   #configurations =         12360 constructible
+ T-- = 1   T- = 1   T+ = 6   T++ = 2   #configurations =         48486 convergent
+ T-- = 1   T- = 1   T+ = 6   T++ = 3   #configurations =         95708 convergent
+ T-- = 1   T- = 1   T+ = 6   T++ = 4   #configurations =        103938 convergent
+ T-- = 1   T- = 1   T+ = 6   T++ = 5   #configurations =         61872 convergent
+ T-- = 1   T- = 1   T+ = 6   T++ = 6   #configurations =         18298 convergent
+ T-- = 1   T- = 1   T+ = 6   T++ = 7   #configurations =          2028 convergent
+ T-- = 1   T- = 1   T+ = 6   T++ = 8   #configurations =            66 convergent
+ T-- = 1   T- = 1   T+ = 7   T++ = 0   #configurations =            56 maximal
+ T-- = 1   T- = 1   T+ = 7   T++ = 1   #configurations =           500 constructible
+ T-- = 1   T- = 1   T+ = 7   T++ = 2   #configurations =          1836 convergent
+ T-- = 1   T- = 1   T+ = 7   T++ = 3   #configurations =          3652 convergent
+ T-- = 1   T- = 1   T+ = 7   T++ = 4   #configurations =          4300 convergent
+ T-- = 1   T- = 1   T+ = 7   T++ = 5   #configurations =          3036 convergent
+ T-- = 1   T- = 1   T+ = 7   T++ = 6   #configurations =          1220 convergent
+ T-- = 1   T- = 1   T+ = 7   T++ = 7   #configurations =           236 convergent
+ T-- = 1   T- = 1   T+ = 7   T++ = 8   #configurations =            12 convergent
+ T-- = 1   T- = 1   T+ = 8   T++ = 0   #configurations =             1 maximal
+ T-- = 1   T- = 1   T+ = 8   T++ = 1   #configurations =             8 constructible
+ T-- = 1   T- = 1   T+ = 8   T++ = 2   #configurations =            28 convergent
+ T-- = 1   T- = 1   T+ = 8   T++ = 3   #configurations =            56 convergent
+ T-- = 1   T- = 1   T+ = 8   T++ = 4   #configurations =            70 convergent
+ T-- = 1   T- = 1   T+ = 8   T++ = 5   #configurations =            56 convergent
+ T-- = 1   T- = 1   T+ = 8   T++ = 6   #configurations =            28 convergent
+ T-- = 1   T- = 1   T+ = 8   T++ = 7   #configurations =             8 convergent
+ T-- = 1   T- = 1   T+ = 8   T++ = 8   #configurations =             1 convergent
+ T-- = 1   T- = 2   T+ = 1   T++ = 1   #configurations =  215891924562 destructible
+ T-- = 1   T- = 2   T+ = 1   T++ = 2   #configurations =   13085548056 destructible+convergent
+ T-- = 1   T- = 2   T+ = 1   T++ = 3   #configurations =     867896856 destructible+convergent
+ T-- = 1   T- = 2   T+ = 1   T++ = 4   #configurations =      54045144 destructible+convergent
+ T-- = 1   T- = 2   T+ = 1   T++ = 5   #configurations =       1794798 destructible+convergent
+ T-- = 1   T- = 2   T+ = 2   T++ = 1   #configurations =     232206912 
+ T-- = 1   T- = 2   T+ = 2   T++ = 2   #configurations =     285546870 convergent
+ T-- = 1   T- = 2   T+ = 2   T++ = 3   #configurations =      40116384 convergent
+ T-- = 1   T- = 2   T+ = 2   T++ = 4   #configurations =       3831624 convergent
+ T-- = 1   T- = 2   T+ = 2   T++ = 5   #configurations =        173016 convergent
+ T-- = 1   T- = 2   T+ = 3   T++ = 1   #configurations =       1998432 
+ T-- = 1   T- = 2   T+ = 3   T++ = 2   #configurations =       4698648 convergent
+ T-- = 1   T- = 2   T+ = 3   T++ = 3   #configurations =       3205656 convergent
+ T-- = 1   T- = 2   T+ = 3   T++ = 4   #configurations =        472392 convergent
+ T-- = 1   T- = 2   T+ = 3   T++ = 5   #configurations =         29160 convergent
+ T-- = 1   T- = 2   T+ = 4   T++ = 1   #configurations =         19440 
+ T-- = 1   T- = 2   T+ = 4   T++ = 2   #configurations =         77760 convergent
+ T-- = 1   T- = 2   T+ = 4   T++ = 3   #configurations =        101088 convergent
+ T-- = 1   T- = 2   T+ = 4   T++ = 4   #configurations =         46656 convergent
+ T-- = 1   T- = 2   T+ = 4   T++ = 5   #configurations =          3888 convergent
+ T-- = 1   T- = 2   T+ = 5   T++ = 1   #configurations =           486 
+ T-- = 1   T- = 2   T+ = 5   T++ = 2   #configurations =          1944 convergent
+ T-- = 1   T- = 2   T+ = 5   T++ = 3   #configurations =          2916 convergent
+ T-- = 1   T- = 2   T+ = 5   T++ = 4   #configurations =          1944 convergent
+ T-- = 1   T- = 2   T+ = 5   T++ = 5   #configurations =           486 convergent
+ T-- = 1   T- = 3   T+ = 1   T++ = 1   #configurations =   32260961880 destructible
+ T-- = 1   T- = 3   T+ = 1   T++ = 2   #configurations =     281956788 destructible+convergent
+ T-- = 1   T- = 3   T+ = 1   T++ = 3   #configurations =       2799360 destructible+convergent
+ T-- = 1   T- = 3   T+ = 2   T++ = 1   #configurations =       4933872 
+ T-- = 1   T- = 3   T+ = 2   T++ = 2   #configurations =       5137263 convergent
+ T-- = 1   T- = 3   T+ = 2   T++ = 3   #configurations =        113724 convergent
+ T-- = 1   T- = 3   T+ = 3   T++ = 1   #configurations =          8748 
+ T-- = 1   T- = 3   T+ = 3   T++ = 2   #configurations =         17496 convergent
+ T-- = 1   T- = 3   T+ = 3   T++ = 3   #configurations =          8748 convergent
+ T-- = 1   T- = 4   T+ = 1   T++ = 1   #configurations =    1500491952 destructible
+ T-- = 1   T- = 4   T+ = 1   T++ = 2   #configurations =       1102248 destructible+convergent
+ T-- = 1   T- = 4   T+ = 2   T++ = 1   #configurations =         17496 
+ T-- = 1   T- = 4   T+ = 2   T++ = 2   #configurations =         17496 convergent
+ T-- = 1   T- = 5   T+ = 1   T++ = 1   #configurations =      16966746 destructible
+ T-- = 1   T- = 6   T+ = 1   T++ = 1   #configurations =         39366 destructible
+ T-- = 2   T- = 1   T+ = 1   T++ = 0   #configurations =      26073184 maximal+divergent
+ T-- = 2   T- = 1   T+ = 1   T++ = 1   #configurations =  364267517208 constructible+divergent
+ T-- = 2   T- = 1   T+ = 1   T++ = 2   #configurations =  211562591118 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 1   T++ = 3   #configurations =   72053795944 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 1   T++ = 4   #configurations =   16342411236 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 1   T++ = 5   #configurations =    2341224960 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 1   T++ = 6   #configurations =     188972572 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 1   T++ = 7   #configurations =       7229256 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 1   T++ = 8   #configurations =         99096 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 2   T++ = 0   #configurations =        904832 maximal+divergent
+ T-- = 2   T- = 1   T+ = 2   T++ = 1   #configurations =    1078506992 constructible+divergent
+ T-- = 2   T- = 1   T+ = 2   T++ = 2   #configurations =    2134086888 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 2   T++ = 3   #configurations =    1417826936 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 2   T++ = 4   #configurations =     491752604 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 2   T++ = 5   #configurations =      93766722 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 2   T++ = 6   #configurations =       9159452 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 2   T++ = 7   #configurations =        396284 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 2   T++ = 8   #configurations =          5868 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 3   T++ = 0   #configurations =         49216 maximal+divergent
+ T-- = 2   T- = 1   T+ = 3   T++ = 1   #configurations =      12293096 constructible+divergent
+ T-- = 2   T- = 1   T+ = 3   T++ = 2   #configurations =      39069544 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 3   T++ = 3   #configurations =      45799216 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 3   T++ = 4   #configurations =      24117128 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 3   T++ = 5   #configurations =       6059776 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 3   T++ = 6   #configurations =        716776 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 3   T++ = 7   #configurations =         35384 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 3   T++ = 8   #configurations =           568 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 4   T++ = 0   #configurations =          2688 maximal+divergent
+ T-- = 2   T- = 1   T+ = 4   T++ = 1   #configurations =        174096 constructible+divergent
+ T-- = 2   T- = 1   T+ = 4   T++ = 2   #configurations =        787392 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 4   T++ = 3   #configurations =       1329072 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 4   T++ = 4   #configurations =       1024752 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 4   T++ = 5   #configurations =        360240 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 4   T++ = 6   #configurations =         51360 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 4   T++ = 7   #configurations =          2832 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 4   T++ = 8   #configurations =            48 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 5   T++ = 0   #configurations =            96 maximal+divergent
+ T-- = 2   T- = 1   T+ = 5   T++ = 1   #configurations =          4680 constructible+divergent
+ T-- = 2   T- = 1   T+ = 5   T++ = 2   #configurations =         20388 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 5   T++ = 3   #configurations =         36936 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 5   T++ = 4   #configurations =         34110 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 5   T++ = 5   #configurations =         16416 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 5   T++ = 6   #configurations =          3720 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 5   T++ = 7   #configurations =           288 convergent+divergent=saddle point
+ T-- = 2   T- = 1   T+ = 5   T++ = 8   #configurations =             6 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 1   T++ = 1   #configurations =  211706205579 divergent
+ T-- = 2   T- = 2   T+ = 1   T++ = 2   #configurations =   19410131412 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 1   T++ = 3   #configurations =    1531408356 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 1   T++ = 4   #configurations =     102003624 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 1   T++ = 5   #configurations =       3204198 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 2   T++ = 1   #configurations =     278054208 divergent
+ T-- = 2   T- = 2   T+ = 2   T++ = 2   #configurations =     341954946 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 2   T++ = 3   #configurations =      51076656 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 2   T++ = 4   #configurations =       5021352 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 2   T++ = 5   #configurations =        216270 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 3   T++ = 1   #configurations =       2111184 divergent
+ T-- = 2   T- = 2   T+ = 3   T++ = 2   #configurations =       4961088 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 3   T++ = 3   #configurations =       3394224 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 3   T++ = 4   #configurations =        513216 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 3   T++ = 5   #configurations =         31104 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 4   T++ = 1   #configurations =         19440 divergent
+ T-- = 2   T- = 2   T+ = 4   T++ = 2   #configurations =         77760 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 4   T++ = 3   #configurations =        101088 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 4   T++ = 4   #configurations =         46656 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 4   T++ = 5   #configurations =          3888 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 5   T++ = 1   #configurations =           486 divergent
+ T-- = 2   T- = 2   T+ = 5   T++ = 2   #configurations =          1944 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 5   T++ = 3   #configurations =          2916 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 5   T++ = 4   #configurations =          1944 convergent+divergent=saddle point
+ T-- = 2   T- = 2   T+ = 5   T++ = 5   #configurations =           486 convergent+divergent=saddle point
+ T-- = 2   T- = 3   T+ = 1   T++ = 1   #configurations =   40499417124 divergent
+ T-- = 2   T- = 3   T+ = 1   T++ = 2   #configurations =     543666330 convergent+divergent=saddle point
+ T-- = 2   T- = 3   T+ = 1   T++ = 3   #configurations =       6316056 convergent+divergent=saddle point
+ T-- = 2   T- = 3   T+ = 2   T++ = 1   #configurations =      10165176 divergent
+ T-- = 2   T- = 3   T+ = 2   T++ = 2   #configurations =      10589454 convergent+divergent=saddle point
+ T-- = 2   T- = 3   T+ = 2   T++ = 3   #configurations =        244944 convergent+divergent=saddle point
+ T-- = 2   T- = 3   T+ = 3   T++ = 1   #configurations =         17496 divergent
+ T-- = 2   T- = 3   T+ = 3   T++ = 2   #configurations =         34992 convergent+divergent=saddle point
+ T-- = 2   T- = 3   T+ = 3   T++ = 3   #configurations =         17496 convergent+divergent=saddle point
+ T-- = 2   T- = 4   T+ = 1   T++ = 1   #configurations =    2406286116 divergent
+ T-- = 2   T- = 4   T+ = 1   T++ = 2   #configurations =       2729376 convergent+divergent=saddle point
+ T-- = 2   T- = 4   T+ = 2   T++ = 1   #configurations =         52488 divergent
+ T-- = 2   T- = 4   T+ = 2   T++ = 2   #configurations =         52488 convergent+divergent=saddle point
+ T-- = 2   T- = 5   T+ = 1   T++ = 1   #configurations =      34484616 divergent
+ T-- = 2   T- = 6   T+ = 1   T++ = 1   #configurations =         98415 divergent
+ T-- = 3   T- = 1   T+ = 1   T++ = 0   #configurations =       7748352 maximal+divergent
+ T-- = 3   T- = 1   T+ = 1   T++ = 1   #configurations =   96443355744 constructible+divergent
+ T-- = 3   T- = 1   T+ = 1   T++ = 2   #configurations =   71212217808 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 1   T++ = 3   #configurations =   28081125504 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 1   T++ = 4   #configurations =    6745773348 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 1   T++ = 5   #configurations =     956255196 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 1   T++ = 6   #configurations =      71378892 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 1   T++ = 7   #configurations =       2454300 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 1   T++ = 8   #configurations =         30036 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 2   T++ = 0   #configurations =         63744 maximal+divergent
+ T-- = 3   T- = 1   T+ = 2   T++ = 1   #configurations =      99144120 constructible+divergent
+ T-- = 3   T- = 1   T+ = 2   T++ = 2   #configurations =     211228212 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 2   T++ = 3   #configurations =     161996928 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 2   T++ = 4   #configurations =      61017636 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 2   T++ = 5   #configurations =      11535600 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 2   T++ = 6   #configurations =       1010580 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 2   T++ = 7   #configurations =         37560 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 2   T++ = 8   #configurations =           471 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 0   #configurations =           768 maximal+divergent
+ T-- = 3   T- = 1   T+ = 3   T++ = 1   #configurations =        340260 constructible+divergent
+ T-- = 3   T- = 1   T+ = 3   T++ = 2   #configurations =       1126164 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 3   #configurations =       1405344 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 4   #configurations =        810096 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 5   #configurations =        213024 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 6   #configurations =         22512 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 7   #configurations =           924 convergent+divergent=saddle point
+ T-- = 3   T- = 1   T+ = 3   T++ = 8   #configurations =            12 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 1   T++ = 1   #configurations =   62937314928 divergent
+ T-- = 3   T- = 2   T+ = 1   T++ = 2   #configurations =    9570447108 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 1   T++ = 3   #configurations =     942394824 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 1   T++ = 4   #configurations =      66436200 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 1   T++ = 5   #configurations =       1905120 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 2   T++ = 1   #configurations =      37009872 divergent
+ T-- = 3   T- = 2   T+ = 2   T++ = 2   #configurations =      47605644 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 2   T++ = 3   #configurations =      11199384 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 2   T++ = 4   #configurations =       1255824 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 2   T++ = 5   #configurations =         45198 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 3   T++ = 1   #configurations =         92340 divergent
+ T-- = 3   T- = 2   T+ = 3   T++ = 2   #configurations =        221616 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 3   T++ = 3   #configurations =        168156 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 3   T++ = 4   #configurations =         40824 convergent+divergent=saddle point
+ T-- = 3   T- = 2   T+ = 3   T++ = 5   #configurations =          1944 convergent+divergent=saddle point
+ T-- = 3   T- = 3   T+ = 1   T++ = 1   #configurations =   19723721940 divergent
+ T-- = 3   T- = 3   T+ = 1   T++ = 2   #configurations =     407123172 convergent+divergent=saddle point
+ T-- = 3   T- = 3   T+ = 1   T++ = 3   #configurations =       5607468 convergent+divergent=saddle point
+ T-- = 3   T- = 3   T+ = 2   T++ = 1   #configurations =       5423760 divergent
+ T-- = 3   T- = 3   T+ = 2   T++ = 2   #configurations =       5662143 convergent+divergent=saddle point
+ T-- = 3   T- = 3   T+ = 2   T++ = 3   #configurations =        148716 convergent+divergent=saddle point
+ T-- = 3   T- = 3   T+ = 3   T++ = 1   #configurations =          8748 divergent
+ T-- = 3   T- = 3   T+ = 3   T++ = 2   #configurations =         17496 convergent+divergent=saddle point
+ T-- = 3   T- = 3   T+ = 3   T++ = 3   #configurations =          8748 convergent+divergent=saddle point
+ T-- = 3   T- = 4   T+ = 1   T++ = 1   #configurations =    1759161564 divergent
+ T-- = 3   T- = 4   T+ = 1   T++ = 2   #configurations =       2991816 convergent+divergent=saddle point
+ T-- = 3   T- = 4   T+ = 2   T++ = 1   #configurations =         52488 divergent
+ T-- = 3   T- = 4   T+ = 2   T++ = 2   #configurations =         52488 convergent+divergent=saddle point
+ T-- = 3   T- = 5   T+ = 1   T++ = 1   #configurations =      35193204 divergent
+ T-- = 3   T- = 6   T+ = 1   T++ = 1   #configurations =        131220 divergent
+ T-- = 4   T- = 1   T+ = 1   T++ = 0   #configurations =        804352 maximal+divergent
+ T-- = 4   T- = 1   T+ = 1   T++ = 1   #configurations =   10171582244 constructible+divergent
+ T-- = 4   T- = 1   T+ = 1   T++ = 2   #configurations =    9188517267 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 1   T++ = 3   #configurations =    4116782452 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 1   T++ = 4   #configurations =    1041490220 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 1   T++ = 5   #configurations =     141736080 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 1   T++ = 6   #configurations =       9563698 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 1   T++ = 7   #configurations =        291164 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 1   T++ = 8   #configurations =          3138 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 2   T++ = 0   #configurations =          1024 maximal+divergent
+ T-- = 4   T- = 1   T+ = 2   T++ = 1   #configurations =       2181888 constructible+divergent
+ T-- = 4   T- = 1   T+ = 2   T++ = 2   #configurations =       5345240 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 2   T++ = 3   #configurations =       4731184 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 2   T++ = 4   #configurations =       1872312 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 2   T++ = 5   #configurations =        329504 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 2   T++ = 6   #configurations =         24760 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 2   T++ = 7   #configurations =           768 convergent+divergent=saddle point
+ T-- = 4   T- = 1   T+ = 2   T++ = 8   #configurations =             8 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 1   T++ = 1   #configurations =    7264381482 divergent
+ T-- = 4   T- = 2   T+ = 1   T++ = 2   #configurations =    1717613910 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 1   T++ = 3   #configurations =     216886248 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 1   T++ = 4   #configurations =      15740568 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 1   T++ = 5   #configurations =        398520 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 2   T++ = 1   #configurations =        954504 divergent
+ T-- = 4   T- = 2   T+ = 2   T++ = 2   #configurations =       1421064 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 2   T++ = 3   #configurations =        530712 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 2   T++ = 4   #configurations =         66096 convergent+divergent=saddle point
+ T-- = 4   T- = 2   T+ = 2   T++ = 5   #configurations =          1944 convergent+divergent=saddle point
+ T-- = 4   T- = 3   T+ = 1   T++ = 1   #configurations =    2732848956 divergent
+ T-- = 4   T- = 3   T+ = 1   T++ = 2   #configurations =     117019809 convergent+divergent=saddle point
+ T-- = 4   T- = 3   T+ = 1   T++ = 3   #configurations =       2073276 convergent+divergent=saddle point
+ T-- = 4   T- = 3   T+ = 2   T++ = 1   #configurations =        192456 divergent
+ T-- = 4   T- = 3   T+ = 2   T++ = 2   #configurations =        209952 convergent+divergent=saddle point
+ T-- = 4   T- = 3   T+ = 2   T++ = 3   #configurations =         17496 convergent+divergent=saddle point
+ T-- = 4   T- = 4   T+ = 1   T++ = 1   #configurations =     530113491 divergent
+ T-- = 4   T- = 4   T+ = 1   T++ = 2   #configurations =       1522152 convergent+divergent=saddle point
+ T-- = 4   T- = 4   T+ = 2   T++ = 1   #configurations =         17496 divergent
+ T-- = 4   T- = 4   T+ = 2   T++ = 2   #configurations =         17496 convergent+divergent=saddle point
+ T-- = 4   T- = 5   T+ = 1   T++ = 1   #configurations =      18147726 divergent
+ T-- = 4   T- = 6   T+ = 1   T++ = 1   #configurations =         98415 divergent
+ T-- = 5   T- = 1   T+ = 1   T++ = 0   #configurations =         27648 maximal+divergent
+ T-- = 5   T- = 1   T+ = 1   T++ = 1   #configurations =     416991294 constructible+divergent
+ T-- = 5   T- = 1   T+ = 1   T++ = 2   #configurations =     456568272 convergent+divergent=saddle point
+ T-- = 5   T- = 1   T+ = 1   T++ = 3   #configurations =     227830752 convergent+divergent=saddle point
+ T-- = 5   T- = 1   T+ = 1   T++ = 4   #configurations =      58327992 convergent+divergent=saddle point
+ T-- = 5   T- = 1   T+ = 1   T++ = 5   #configurations =       7322994 convergent+divergent=saddle point
+ T-- = 5   T- = 1   T+ = 1   T++ = 6   #configurations =        436212 convergent+divergent=saddle point
+ T-- = 5   T- = 1   T+ = 1   T++ = 7   #configurations =         11556 convergent+divergent=saddle point
+ T-- = 5   T- = 1   T+ = 1   T++ = 8   #configurations =           108 convergent+divergent=saddle point
+ T-- = 5   T- = 2   T+ = 1   T++ = 1   #configurations =     318209958 divergent
+ T-- = 5   T- = 2   T+ = 1   T++ = 2   #configurations =     112401594 convergent+divergent=saddle point
+ T-- = 5   T- = 2   T+ = 1   T++ = 3   #configurations =      17845920 convergent+divergent=saddle point
+ T-- = 5   T- = 2   T+ = 1   T++ = 4   #configurations =       1271376 convergent+divergent=saddle point
+ T-- = 5   T- = 2   T+ = 1   T++ = 5   #configurations =         27702 convergent+divergent=saddle point
+ T-- = 5   T- = 3   T+ = 1   T++ = 1   #configurations =     129339180 divergent
+ T-- = 5   T- = 3   T+ = 1   T++ = 2   #configurations =      11123082 convergent+divergent=saddle point
+ T-- = 5   T- = 3   T+ = 1   T++ = 3   #configurations =        271188 convergent+divergent=saddle point
+ T-- = 5   T- = 4   T+ = 1   T++ = 1   #configurations =      31571532 divergent
+ T-- = 5   T- = 4   T+ = 1   T++ = 2   #configurations =        314928 convergent+divergent=saddle point
+ T-- = 5   T- = 5   T+ = 1   T++ = 1   #configurations =       3897234 divergent
+ T-- = 5   T- = 6   T+ = 1   T++ = 1   #configurations =         39366 divergent
+ T-- = 6   T- = 1   T+ = 1   T++ = 0   #configurations =           256 maximal+divergent
+ T-- = 6   T- = 1   T+ = 1   T++ = 1   #configurations =       5338384 constructible+divergent
+ T-- = 6   T- = 1   T+ = 1   T++ = 2   #configurations =       7146964 convergent+divergent=saddle point
+ T-- = 6   T- = 1   T+ = 1   T++ = 3   #configurations =       3872296 convergent+divergent=saddle point
+ T-- = 6   T- = 1   T+ = 1   T++ = 4   #configurations =        956137 convergent+divergent=saddle point
+ T-- = 6   T- = 1   T+ = 1   T++ = 5   #configurations =        106396 convergent+divergent=saddle point
+ T-- = 6   T- = 1   T+ = 1   T++ = 6   #configurations =          5458 convergent+divergent=saddle point
+ T-- = 6   T- = 1   T+ = 1   T++ = 7   #configurations =           124 convergent+divergent=saddle point
+ T-- = 6   T- = 1   T+ = 1   T++ = 8   #configurations =             1 convergent+divergent=saddle point
+ T-- = 6   T- = 2   T+ = 1   T++ = 1   #configurations =       4177656 divergent
+ T-- = 6   T- = 2   T+ = 1   T++ = 2   #configurations =       2205468 convergent+divergent=saddle point
+ T-- = 6   T- = 2   T+ = 1   T++ = 3   #configurations =        425736 convergent+divergent=saddle point
+ T-- = 6   T- = 2   T+ = 1   T++ = 4   #configurations =         27216 convergent+divergent=saddle point
+ T-- = 6   T- = 2   T+ = 1   T++ = 5   #configurations =           486 convergent+divergent=saddle point
+ T-- = 6   T- = 3   T+ = 1   T++ = 1   #configurations =       1740852 divergent
+ T-- = 6   T- = 3   T+ = 1   T++ = 2   #configurations =        290871 convergent+divergent=saddle point
+ T-- = 6   T- = 3   T+ = 1   T++ = 3   #configurations =          8748 convergent+divergent=saddle point
+ T-- = 6   T- = 4   T+ = 1   T++ = 1   #configurations =        468018 divergent
+ T-- = 6   T- = 4   T+ = 1   T++ = 2   #configurations =         17496 convergent+divergent=saddle point
+ T-- = 6   T- = 5   T+ = 1   T++ = 1   #configurations =         78732 divergent
+ T-- = 6   T- = 6   T+ = 1   T++ = 1   #configurations =          6561 divergent
+                                                         -------------
+                                                         2541865828329

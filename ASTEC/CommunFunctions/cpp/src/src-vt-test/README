@@ -1,0 +1,132 @@
+willis-%\31%% test-cirad param-cirad toto.ppm 
+mosaic: min =(0,0), max=(3497,3885) dims=[3498 3886]
+  #0: dx=0=0+0 dy=0
+  #1: dx=0=0+1 dy=1200
+  #2: dx=0=0+2 dy=2350
+  #3: dx=1350=1350+0 dy=0
+  #4: dx=1300=1300+1 dy=1200
+  #5: dx=1450=1450+2 dy=2350
+next image = 3, intersect = 1072128.000000
+  critere opt = 378966.000000 T=[31 -42]
+next image = 1, intersect = 922656.000000
+  critere opt = 804174.000000 T=[97 1]
+next image = 4, intersect = 2071584.000000
+  critere opt = 2663090.000000 T=[100 -39]
+next image = 2, intersect = 1079256.000000
+  critere opt = 1016214.000000 T=[-96 97]
+next image = 5, intersect = 1881984.000000
+  critere opt = 1482224.000000 T=[97 -67]
+mosaic: min =(-96,-42), max=(3594,3982) dims=[3691 4025]
+  #0: dx=96=96+0 dy=42
+  #1: dx=193=193+1 dy=1243
+  #2: dx=0=0+2 dy=2489
+  #3: dx=1477=1477+0 dy=0
+  #4: dx=1496=1496+1 dy=1203
+  #5: dx=1643=1643+2 dy=2325
+
+
+willis-%\35%% test-cirad param-cirad toto.ppm 
+mosaic: min =(0,0), max=(3497,3885) dims=[3498 3886]
+  #0: dx=0=0+0 dy=0
+  #1: dx=0=0+1 dy=1200
+  #2: dx=0=0+2 dy=2350
+  #3: dx=1350=1350+0 dy=0
+  #4: dx=1300=1300+1 dy=1200
+  #5: dx=1450=1450+2 dy=2350
+next image = 3, intersect = 1072128.000000
+  critere opt = 378966.000000 T=[31 -42] OFF=[1381 -42]
+next image = 1, intersect = 922656.000000
+  critere opt = 757643.000000 T=[-149 149] OFF=[-149 1349]
+next image = 4, intersect = 2071584.000000
+  critere opt = 1554883.000000 T=[-129 109] OFF=[1171 1309]
+next image = 2, intersect = 1079256.000000
+  critere opt = 386057.000000 T=[-70 125] OFF=[-70 2475]
+next image = 5, intersect = 1881984.000000
+  critere opt = 692107.000000 T=[-132 81] OFF=[1318 2431]
+mosaic: min =(-149,-42), max=(3428,4010) dims=[3578 4053]
+  #0: dx=149=149+0 dy=42
+  #1: dx=0=0+1 dy=1391
+  #2: dx=79=79+2 dy=2517
+  #3: dx=1530=1530+0 dy=0
+  #4: dx=1320=1320+1 dy=1351
+  #5: dx=1467=1467+2 dy=2473
+
+willis-%\43%% test-cirad param-cirad-2 toto.ppm
+mosaic: min =(0,0), max=(2047,2735) dims=[2048 2736]
+  #0: dx=0=0+0 dy=0
+  #1: dx=0=0+1 dy=1200
+next image = 1, intersect = 688128.000000
+  critere opt = 574419.000000 T=[96 1] OFF=[96 1201]
+mosaic: min =(0,0), max=(2143,2736) dims=[2144 2737]
+  #0: dx=0=0+0 dy=0
+  #1: dx=96=96+1 dy=1201
+
+willis-%\49%% test-cirad param-cirad toto.ppm   
+mosaic: min =(0,0), max=(3497,3885) dims=[3498 3886]
+  #0: dx=0=0+0 dy=0
+  #1: dx=0=0+1 dy=1200
+  #2: dx=0=0+2 dy=2350
+  #3: dx=1350=1350+0 dy=0
+  #4: dx=1300=1300+1 dy=1200
+  #5: dx=1450=1450+2 dy=2350
+next image = 3, intersect = 1072128.000000
+   TY= -142
+willis-%\50%%  gmake test-cirad                 
+gmake: `test-cirad' is up to date.
+willis-%\51%% test-cirad param-cirad toto.ppm 
+mosaic: min =(0,0), max=(3497,3885) dims=[3498 3886]
+  #0: dx=0=0+0 dy=0
+  #1: dx=0=0+1 dy=1200
+  #2: dx=0=0+2 dy=2350
+  #3: dx=1350=1350+0 dy=0
+  #4: dx=1300=1300+1 dy=1200
+  #5: dx=1450=1450+2 dy=2350
+next image = 3, intersect = 1072128.000000
+  critere opt = 9.458567 T=[31 -42] OFF=[1381 -42]
+next image = 1, intersect = 922656.000000
+  critere opt = 22.821047 T=[96 0] OFF=[96 1200]
+next image = 4, intersect = 2071584.000000
+  critere opt = 15.583314 T=[117 -39] OFF=[1417 1161]
+next image = 2, intersect = 1079256.000000
+  critere opt = 25.320169 T=[128 -18] OFF=[128 2332]
+next image = 5, intersect = 1881984.000000
+  critere opt = 18.276791 T=[66 -62] OFF=[1516 2288]
+mosaic: min =(0,-42), max=(3563,3867) dims=[3564 3910]
+  #0: dx=0=0+0 dy=42
+  #1: dx=96=96+1 dy=1242
+  #2: dx=128=128+2 dy=2374
+  #3: dx=1381=1381+0 dy=0
+  #4: dx=1417=1417+1 dy=1203
+  #5: dx=1516=1516+2 dy=2330
+
+willis-%\61%% test-cirad param-cirad toto.ppm 
+mosaic: min =(0,0), max=(3497,3885) dims=[3498 3886]
+  #0: dx=0 dy=0
+  #1: dx=0 dy=1200
+  #2: dx=0 dy=2350
+  #3: dx=1350 dy=0
+  #4: dx=1300 dy=1200
+  #5: dx=1450 dy=2350
+- next image = 3, intersect = 1072128.000000
+  correction =(0 0)
+  critere opt = 9.302189 T=[32 -42] OFF=[1382 -42]
+- next image = 1, intersect = 922656.000000
+  correction =(16 -21)
+  critere opt = 22.615556 T=[97 1] OFF=[97 1201]
+- next image = 4, intersect = 2071584.000000
+  correction =(43 -13)
+  critere opt = 15.420148 T=[117 -39] OFF=[1417 1161]
+- next image = 2, intersect = 1079256.000000
+  correction =(107 -19)
+  critere opt = 8.436066 T=[175 -23] OFF=[175 2327]
+- next image = 5, intersect = 1881984.000000
+  correction =(129 -20)
+  critere opt = 8.036683 T=[113 -67] OFF=[1563 2283]
+mosaic: min =(0,-42), max=(3610,3862) dims=[3611 3905]
+  #0: dx=0 dy=42
+  #1: dx=97 dy=1243
+  #2: dx=175 dy=2369
+  #3: dx=1382 dy=0
+  #4: dx=1417 dy=1203
+  #5: dx=1563 dy=2325
+image: min =(0,-42), max=(3610,3862) dims=[3611 3905]
