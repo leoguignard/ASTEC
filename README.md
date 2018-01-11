@@ -6,7 +6,6 @@ ASTEC is fully described in the following article: [Contact-dependent cell commu
 ## I - CONTENTS OF THE  REPOSITORY
 Once uncompressed, the folder contains the following elements:
   - ASTEC :  main source code for the ASTEC package
-  - DATA   : a dataset example of 4 angles and 20 time points from SPIM acquisition
   - license.txt   : the licence terms you accept by using the workflow
   - index.ipynb : a notebook example which shows how to run the different functions of the ASTEC segmentation and tracking algorithm
   - README.TXT    : this file
